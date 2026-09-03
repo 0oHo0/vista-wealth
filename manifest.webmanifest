@@ -1,0 +1,27 @@
+{
+  "name": "Vista Wealth · 投资储蓄计划演示",
+  "short_name": "Vista",
+  "description": "投资储蓄计划客户演示：财富规划器与产品介绍，支持中英双语与离线运行。",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0a3642",
+  "theme_color": "#0f4c5c",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

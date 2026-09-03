@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>远景成长 · 财富规划器 | Vista Growth Planner</title>
+  <!-- PWA / iPad 主屏离线运行 -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0f4c5c" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Vista" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="assets/icons/favicon-48.png" />
+  <link rel="stylesheet" href="assets/styles.css?v=3" />
+</head>
+<body>
+  <!-- ============ 顶部导航 ============ -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <div class="nav-logo">V</div>
+      <div>
+        <div class="nav-name">Vista Wealth</div>
+        <div class="nav-sub" data-i18n="nav.sub">投资储蓄计划 · 客户演示</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link active" href="index.html" data-i18n="nav.plan">财富规划</a>
+      <a class="nav-link" href="product.html" data-i18n="nav.product">产品介绍</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-disclaimer" data-i18n="nav.demo">演示数据，非保证收益</span>
+      <div class="lang-switch">
+        <button data-lang-btn="zh">中文</button>
+        <button data-lang-btn="en">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="shell">
+    <!-- ============ 左侧参数面板 ============ -->
+    <aside class="controls panel-scroll">
+      <div class="card">
+        <div class="card-h"><h3 data-i18n="planner.title">客户规划参数</h3></div>
+        <div style="padding:0 18px 12px" class="hint" data-i18n="planner.subtitle">拖动调整，图表实时更新</div>
+
+        <div class="ctrl-group">
+          <div class="ctrl-label"><span data-i18n="ctrl.age">当前年龄</span><span class="ctrl-value" id="ageVal"></span></div>
+          <input type="range" id="age" min="18" max="55" step="1" />
+          <div class="range-meta"><span>18</span><span>55</span></div>
+        </div>
+
+        <div class="ctrl-group">
+          <div class="ctrl-label"><span data-i18n="ctrl.retire">目标领取年龄</span><span class="ctrl-value" id="retireAgeVal"></span></div>
+          <input type="range" id="retireAge" min="45" max="75" step="1" />
+          <div class="range-meta"><span>45</span><span>75</span></div>
+        </div>
+
+        <div class="ctrl-group">
+          <div class="ctrl-label"><span data-i18n="ctrl.premium">每年投入</span><span class="ctrl-value" id="premiumVal"></span></div>
+          <input type="range" id="premium" min="6000" max="300000" step="2000" />
+          <div class="range-meta"><span>6,000</span><span>300,000</span></div>
+        </div>
+
+        <div class="ctrl-group">
+          <div class="ctrl-label"><span data-i18n="ctrl.payYears">缴费期</span></div>
+          <div class="segmented seg-3">
+            <button class="seg-opt" data-pay="10"><span class="seg-t">10 <span data-i18n="ctrl.yearUnit">年</span></span></button>
+            <button class="seg-opt" data-pay="15"><span class="seg-t">15 <span data-i18n="ctrl.yearUnit">年</span></span></button>
+            <button class="seg-opt" data-pay="20"><span class="seg-t">20 <span data-i18n="ctrl.yearUnit">年</span></span></button>
+          </div>
+        </div>
+
+        <div class="ctrl-group">
+          <div class="ctrl-label"><span data-i18n="ctrl.risk">投资组合（假定年回报）</span></div>
+          <div class="segmented" style="grid-template-columns:repeat(3,1fr)">
+            <button class="seg-opt" data-risk="cons"><span class="seg-t" data-i18n="risk.cons">保守型</span><span class="seg-d">4%</span></button>
+            <button class="seg-opt" data-risk="bal"><span class="seg-t" data-i18n="risk.bal">平衡型</span><span class="seg-d">6%</span></button>
+            <button class="seg-opt" data-risk="agg"><span class="seg-t" data-i18n="risk.agg">进取型</span><span class="seg-d">8%</span></button>
+          </div>
+        </div>
+
+        <div class="ctrl-group">
+          <div class="ctrl-label"><span data-i18n="ctrl.withdrawYears">退休后领取年限</span><span class="ctrl-value" id="withdrawYearsVal"></span></div>
+          <input type="range" id="withdrawYears" min="5" max="30" step="1" />
+          <div class="range-meta"><span>5</span><span>30</span></div>
+        </div>
+
+        <div class="ctrl-group">
+          <button class="btn-primary" id="resetBtn" data-i18n="planner.reset">重置为示例客户</button>
+          <button class="btn-ghost" id="printBtn" data-i18n="planner.print">导出 / 打印本方案</button>
+          <div class="ctrl-note" data-i18n="planner.note"></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ============ 右侧内容区 ============ -->
+    <main class="content">
+      <!-- KPI 行 -->
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label" data-i18n="kpi.invested">累计投入本金</div>
+          <div class="kpi-value" id="kpiInvested">—</div>
+        </div>
+        <div class="kpi accent">
+          <div class="kpi-label" data-i18n="kpi.valueAt">领取时账户价值（所选档位）</div>
+          <div class="kpi-value" id="kpiValue">—</div>
+          <div class="kpi-sub" id="withdrawMeta"></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label" data-i18n="kpi.gain">累计收益</div>
+          <div class="kpi-value" id="kpiGain" style="color:#0f9484">—</div>
+          <div class="kpi-sub"><span data-i18n="kpi.multiple">本金倍数</span>：<b id="kpiMultiple">—</b></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label" data-i18n="kpi.annualIncome">退休后每年约可领取</div>
+          <div class="kpi-value" id="kpiAnnual" style="color:#c8a24b">—</div>
+          <div class="kpi-sub scenario-line" style="display:flex;gap:9px;margin-top:4px;flex-wrap:wrap">
+            <span><i class="dot" style="background:#4a7fb5"></i><b id="scenarioCons">—</b></span>
+            <span><i class="dot" style="background:#0f9484"></i><b id="scenarioBal">—</b></span>
+            <span><i class="dot" style="background:#d4a23a"></i><b id="scenarioAgg">—</b></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 主图表行 -->
+      <div class="charts-row">
+        <div class="card">
+          <div class="card-h">
+            <h3 data-i18n="chart.growth">账户价值增长路径（三档情景）</h3>
+            <span class="hint" data-i18n="chart.growth.hint">横轴为年龄，纵轴为账户价值</span>
+          </div>
+          <div class="card-b" style="height:calc(100% - 48px)">
+            <div id="growthChart" class="chart-box"></div>
+          </div>
+        </div>
+
+        <div class="chart-side">
+          <div class="card mini-card">
+            <div class="card-h"><h3 data-i18n="chart.stack">本金与收益构成</h3></div>
+            <div class="card-b" style="flex:1;min-height:0">
+              <div id="stackChart" class="chart-box"></div>
+            </div>
+          </div>
+          <div class="card mini-card">
+            <div class="card-h"><h3 data-i18n="chart.alloc">资产配置比例</h3></div>
+            <div class="card-b" style="flex:1;min-height:0">
+              <div id="allocChart" class="chart-box"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部：明细表 + 时间轴 -->
+      <div class="bottom-row">
+        <div class="card" style="display:flex;flex-direction:column;min-height:0">
+          <div class="card-h"><h3 data-i18n="table.title">逐年利益演示表</h3></div>
+          <div class="table-wrap">
+            <table class="data">
+              <thead>
+                <tr>
+                  <th data-i18n="table.year">保单年度</th>
+                  <th data-i18n="table.age">年龄</th>
+                  <th data-i18n="table.premium">当年投入</th>
+                  <th data-i18n="table.bonus">红利投入</th>
+                  <th data-i18n="table.cons">保守 4%</th>
+                  <th data-i18n="table.bal">平衡 6%</th>
+                  <th data-i18n="table.agg">进取 8%</th>
+                </tr>
+              </thead>
+              <tbody id="yearBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="overflow:auto">
+          <div class="card-h"><h3 data-i18n="tl.title">保单年度关键事件</h3></div>
+          <div class="timeline">
+            <div class="tl-item gold">
+              <div class="tl-age" id="tlAge1">31</div>
+              <div class="tl-body"><div class="tl-t" data-i18n="tl.welcome">迎新红利</div><div class="tl-d" data-i18n="tl.welcome.d"></div></div>
+            </div>
+            <div class="tl-item gold">
+              <div class="tl-age" id="tlAge2">40</div>
+              <div class="tl-body"><div class="tl-t" data-i18n="tl.special5">特别红利 5%</div><div class="tl-d" data-i18n="tl.special5.d"></div></div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-age" id="tlAge3">40</div>
+              <div class="tl-body"><div class="tl-t" data-i18n="tl.payend">初始投资期结束</div><div class="tl-d" data-i18n="tl.payend.d"></div></div>
+            </div>
+            <div class="tl-item gold">
+              <div class="tl-age" id="tlAge4">51</div>
+              <div class="tl-body"><div class="tl-t" data-i18n="tl.special8">特别红利提升至 8%</div><div class="tl-d" data-i18n="tl.special8.d"></div></div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-age" id="tlAge5">60</div>
+              <div class="tl-body"><div class="tl-t" data-i18n="tl.retire">开始领取</div><div class="tl-d" data-i18n="tl.retire.d"></div></div>
+            </div>
+          </div>
+          <div style="padding:0 18px 14px" class="footnote" data-i18n="footnote"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/vendor/echarts.min.js"></script>
+  <script src="assets/i18n.js?v=3"></script>
+  <script src="assets/app.js?v=5"></script>
+  <script src="assets/pwa.js?v=1"></script>
+</body>
+</html>

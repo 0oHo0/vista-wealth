@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>远景成长投资储蓄计划 | Vista Growth Plan</title>
+  <!-- PWA / iPad 主屏离线运行 -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0f4c5c" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Vista" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="assets/icons/favicon-48.png" />
+  <link rel="stylesheet" href="assets/styles.css?v=3" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-brand">
+      <div class="nav-logo">V</div>
+      <div>
+        <div class="nav-name">Vista Wealth</div>
+        <div class="nav-sub" data-i18n="nav.sub">投资储蓄计划 · 客户演示</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link" href="index.html" data-i18n="nav.plan">财富规划</a>
+      <a class="nav-link active" href="product.html" data-i18n="nav.product">产品介绍</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-disclaimer" data-i18n="nav.demo">演示数据，非保证收益</span>
+      <div class="lang-switch">
+        <button data-lang-btn="zh">中文</button>
+        <button data-lang-btn="en">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="product-body">
+    <div class="wrap">
+      <!-- Hero -->
+      <section class="hero">
+        <span class="eyebrow" data-i18n="pr.eyebrow">长期投资储蓄计划</span>
+        <h1 data-i18n="pr.h1">远景成长投资储蓄计划</h1>
+        <p data-i18n="pr.hero.p"></p>
+        <div class="hero-cta">
+          <a class="btn-lg btn-gold" href="index.html" data-i18n="pr.cta.plan">立即为客户规划</a>
+          <a class="btn-lg btn-outline-w" href="#highlights" data-i18n="pr.cta.detail">了解计划亮点</a>
+        </div>
+      </section>
+
+      <!-- 六大亮点 -->
+      <section class="sec" id="highlights">
+        <div class="sec-title" data-i18n="pr.feat.title">计划六大亮点</div>
+        <div class="sec-sub" data-i18n="pr.feat.sub"></div>
+        <div class="feat-grid">
+          <div class="feat"><div class="feat-ic">◎</div><h4 data-i18n="pr.f1.t"></h4><p data-i18n="pr.f1.d"></p></div>
+          <div class="feat gold"><div class="feat-ic">✦</div><h4 data-i18n="pr.f2.t"></h4><p data-i18n="pr.f2.d"></p></div>
+          <div class="feat gold"><div class="feat-ic">✧</div><h4 data-i18n="pr.f3.t"></h4><p data-i18n="pr.f3.d"></p></div>
+          <div class="feat"><div class="feat-ic">⌛</div><h4 data-i18n="pr.f4.t"></h4><p data-i18n="pr.f4.d"></p></div>
+          <div class="feat"><div class="feat-ic">◈</div><h4 data-i18n="pr.f5.t"></h4><p data-i18n="pr.f5.d"></p></div>
+          <div class="feat"><div class="feat-ic">⛨</div><h4 data-i18n="pr.f6.t"></h4><p data-i18n="pr.f6.d"></p></div>
+        </div>
+      </section>
+
+      <!-- 三类基金 -->
+      <section class="sec">
+        <div class="sec-title" data-i18n="pr.fund.title">三类风险组合，匹配不同目标</div>
+        <div class="sec-sub" data-i18n="pr.fund.sub"></div>
+        <div class="fund-grid">
+          <div class="fund-card">
+            <div class="fund-top">
+              <div class="fund-name" data-i18n="fund.cons">保守型基金</div>
+              <span class="fund-risk risk-low" data-i18n="fund.risk.low"></span>
+            </div>
+            <div class="fund-chart" id="fundCons"></div>
+            <div class="fund-foot"><span data-i18n="fund.assume">假定回报</span><b>4%</b></div>
+          </div>
+          <div class="fund-card">
+            <div class="fund-top">
+              <div class="fund-name" data-i18n="fund.bal">平衡型基金</div>
+              <span class="fund-risk risk-mid" data-i18n="fund.risk.mid"></span>
+            </div>
+            <div class="fund-chart" id="fundBal"></div>
+            <div class="fund-foot"><span data-i18n="fund.assume">假定回报</span><b>6%</b></div>
+          </div>
+          <div class="fund-card">
+            <div class="fund-top">
+              <div class="fund-name" data-i18n="fund.agg">进取型基金</div>
+              <span class="fund-risk risk-high" data-i18n="fund.risk.high"></span>
+            </div>
+            <div class="fund-chart" id="fundAgg"></div>
+            <div class="fund-foot"><span data-i18n="fund.assume">假定回报</span><b>8%</b></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 案例 + 保障 -->
+      <section class="sec">
+        <div class="two-col">
+          <div class="case-card">
+            <div class="sec-title" style="font-size:18px" data-i18n="pr.case.title">客户案例：25 岁开始，65 岁退休</div>
+            <div class="case-head" style="margin-top:14px">
+              <div class="case-spec" data-i18n="pr.case.p1">年投入<b>S$ 7,200</b></div>
+              <div class="case-spec"><span data-i18n="pr.case.p2">缴费期</span><b>10 yrs</b></div>
+              <div class="case-spec"><span data-i18n="pr.case.p3">投资组合</span><b data-i18n="pr.case.p3v"></b></div>
+            </div>
+            <div id="caseChart" class="case-chart"></div>
+            <div class="footnote" style="margin-top:6px" data-i18n="pr.case.note"></div>
+          </div>
+
+          <div>
+            <div class="sec-title" style="font-size:18px;margin-bottom:14px" data-i18n="pr.guard.title">灵活与安心，同样重要</div>
+            <div class="guard-list">
+              <div class="guard-item"><div class="guard-ic">🎫</div><div><h4 data-i18n="g1.t"></h4><p data-i18n="g1.d"></p></div></div>
+              <div class="guard-item"><div class="guard-ic">⏸</div><div><h4 data-i18n="g2.t"></h4><p data-i18n="g2.d"></p></div></div>
+              <div class="guard-item"><div class="guard-ic">↗</div><div><h4 data-i18n="g3.t"></h4><p data-i18n="g3.d"></p></div></div>
+              <div class="guard-item"><div class="guard-ic">♁</div><div><h4 data-i18n="g4.t"></h4><p data-i18n="g4.d"></p></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 免责 -->
+      <div class="disclaimer" data-i18n="pr.disclaimer"></div>
+
+      <!-- CTA -->
+      <section class="cta-band">
+        <h2 data-i18n="pr.cta2.t">为客户生成专属规划</h2>
+        <p data-i18n="pr.cta2.p"></p>
+        <a class="btn-lg btn-gold" href="index.html" data-i18n="pr.cta2.btn">进入财富规划器</a>
+      </section>
+    </div>
+  </div>
+
+  <script src="assets/vendor/echarts.min.js"></script>
+  <script src="assets/i18n.js?v=3"></script>
+  <script src="assets/product.js?v=5"></script>
+  <script src="assets/pwa.js?v=1"></script>
+</body>
+</html>

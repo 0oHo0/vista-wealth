@@ -1,0 +1,10 @@
+# 系统/编辑器
+Thumbs.db
+.DS_Store
+*.log
+__pycache__/
+*.pyc
+
+# 本地服务/临时
+.cache/
+tmp/
