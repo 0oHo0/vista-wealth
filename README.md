@@ -58,3 +58,35 @@ wealth-plan/
 - 主场景为 iPad 横屏：11"（1194×834）与 12.9"（1366×1024）均一屏展示全部模块；
   CSS 在 `max-height:900px` 自动紧凑化，`max-width:900px` 自动堆叠兜底竖屏/窄窗。
 - 触控滑块热区加大（24–28px），适合手指在屏幕上直接拖动给客户演示。
+
+## 在线访问与换设备开发（GitHub）
+
+仓库：https://github.com/0oHo0/vista-wealth
+
+**首次开启在线访问（只需一次，约 10 秒）**：仓库页 Settings → Pages →
+Source 选「Deploy from a branch」→ Branch 选 `main` / 根目录 `/ (root)` → Save。
+约 1 分钟后线上地址为：
+
+- 规划器：https://0oho0.github.io/vista-wealth/index.html
+- 产品页：https://0oho0.github.io/vista-wealth/product.html
+
+之后**每次 `git push` 到 main，Pages 自动更新**，无需再设置。PWA 缓存策略会让已安装到主屏的 iPad 在第二次打开时拿到新版本；改动较大时把 `sw.js` 的 `CACHE` 版本号 +1 可强制立即刷新。
+
+**换一台电脑继续开发**：
+```bash
+git clone https://github.com/0oHo0/vista-wealth.git
+cd vista-wealth
+python -m http.server 8765        # 本地预览：http://127.0.0.1:8765/index.html
+```
+
+**日常改动提交流程**：
+```bash
+# 1. 若改过结构/脚本，重新生成单文件离线版
+python tools/build_standalone.py
+# 2. 提交并推送（Pages 会自动部署）
+git add -A
+git commit -m "描述本次改动"
+git push
+```
+
+> 纯静态站点，无构建步骤、无 npm 依赖；唯一的"构建"是把多文件内联成 `standalone.html` 的脚本，不跑也不影响线上双页版。
