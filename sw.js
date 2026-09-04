@@ -2,17 +2,18 @@
    Service Worker — 全量离线缓存（cache-first）
    改了任何静态文件后，把 CACHE 版本号 +1，客户端会自动换新。
    ============================================================ */
-const CACHE = "vista-wealth-v1";
+const CACHE = "pro-achiever-v10";
 
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./product.html",
   "./manifest.webmanifest",
   "./assets/styles.css",
+  "./assets/product.config.js",
   "./assets/i18n.js",
-  "./assets/app.js",
-  "./assets/product.js",
+  "./assets/model.js",
+  "./assets/charts.js",
+  "./assets/scenes.js",
   "./assets/pwa.js",
   "./assets/vendor/echarts.min.js",
   "./assets/icons/icon-192.png",

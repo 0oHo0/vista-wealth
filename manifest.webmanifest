@@ -1,15 +1,15 @@
 {
-  "name": "Vista Wealth · 投资储蓄计划演示",
-  "short_name": "Vista",
-  "description": "投资储蓄计划客户演示：财富规划器与产品介绍，支持中英双语与离线运行。",
+  "name": "AIA Pro Achiever 3.0 · 客户方案演示",
+  "short_name": "ProAchiever",
+  "description": "友邦成就一生 3.0 计划（AIA Pro Achiever 3.0）客户现场演示：分幕叙事、中英双语、iPad 横屏离线可用。",
   "lang": "zh-CN",
   "dir": "ltr",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "orientation": "any",
-  "background_color": "#0a3642",
-  "theme_color": "#0f4c5c",
+  "orientation": "landscape",
+  "background_color": "#06171E",
+  "theme_color": "#06171E",
   "icons": [
     {
       "src": "assets/icons/icon-192.png",

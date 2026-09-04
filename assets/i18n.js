@@ -1,316 +1,371 @@
 /* ============================================================
-   i18n.js — 中英双语字典与切换逻辑（无依赖，离线可用）
+   i18n.js — 中英双语字典与切换
+   产品：AIA Pro Achiever 3.0 / 友邦成就一生 3.0
    ============================================================ */
 (function () {
+  "use strict";
+
   const DICT = {
+    /* ==========================================================
+       中文
+       ========================================================== */
     zh: {
-      /* nav */
-      "nav.plan": "财富规划",
-      "nav.product": "产品介绍",
-      "nav.sub": "投资储蓄计划 · 客户演示",
-      "nav.demo": "演示数据，非保证收益",
+      /* ---- 应用外壳 ---- */
+      "app.title": "成就一生 3.0 · 客户方案演示",
+      "app.console": "顾问控制台",
+      "app.demo": "演示数据 · 非保证收益",
+      "app.lang": "EN",
+      "scene.hint": "按 ← → 或左右滑动翻页",
 
-      /* planner controls */
-      "planner.title": "客户规划参数",
-      "planner.subtitle": "拖动调整，图表实时更新",
-      "ctrl.age": "当前年龄",
-      "ctrl.ageUnit": "岁",
-      "ctrl.yearUnit": "年",
-      "unit.yr": "年",
-      "ctrl.retire": "目标领取年龄",
-      "ctrl.premium": "每年投入",
-      "ctrl.payYears": "缴费期",
-      "ctrl.risk": "投资组合（假定年回报）",
-      "ctrl.withdrawYears": "退休后领取年限",
-      "risk.cons": "保守型",
-      "risk.bal": "平衡型",
-      "risk.agg": "进取型",
-      "planner.reset": "重置为示例客户",
-      "planner.print": "导出 / 打印本方案",
-      "planner.note": "演示模型：回报率已扣除 1.45% 年度基金管理费假设；迎新红利与特别红利规则参考产品条款简化，正式利益须以保单合同及利益演示书为准。",
+      /* ---- 幕次导航 ---- */
+      "scene.0": "封面",
+      "scene.1": "投入与红利",
+      "scene.2": "增长路径",
+      "scene.3": "价值换算",
+      "scene.4": "风险匹配",
+      "scene.5": "专属方案",
 
-      /* kpi */
-      "kpi.invested": "累计投入本金",
-      "kpi.valueAt": "领取时账户价值（所选档位）",
-      "kpi.gain": "累计收益",
-      "kpi.multiple": "本金倍数",
-      "kpi.annualIncome": "退休后每年约可领取",
-      "kpi.for": "按",
-      "kpi.years": "年等额领取",
-      "kpi.scenarios": "三档情景对比 · 领取时账户价值",
+      /* ---- 封面 ---- */
+      "cover.eyebrow": "期缴保费投资联结保险计划（ILP）",
+      "cover.for": "专属财富方案",
+      "cover.goal": "您的目标",
+      "cover.prepared": "方案顾问",
+      "cover.start": "开始演示",
 
-      /* charts */
-      "chart.growth": "账户价值增长路径（三档情景）",
-      "chart.growth.hint": "横轴为年龄，纵轴为账户价值",
-      "chart.stack": "本金与收益构成",
-      "chart.alloc": "资产配置比例",
-      "chart.stock": "股票",
-      "chart.bond": "固定收益",
+      /* ---- 通用 ---- */
+      "unit.year": "年",
+      "unit.age": "岁",
+      "unit.times": "倍",
+
+      /* ---- 幕 1：投入与红利 ---- */
+      "invest.annual": "年缴保费",
+      "invest.total": "累计投入本金",
+      "engine.title": "只在前几年投入，之后全靠复利与红利",
+      "engine.sub": "每一根柱子 = 当年实际进入投资的资金；金色部分是 AIA 额外替您注入的",
+      "engine.cumulative": "AIA 红利",
+      "engine.after": "之后 {n} 年\n您不再投入一分钱",
+      "engine.after.sub": "剩下的，全部交给复利和红利",
+      "chart.invest.premium": "您的保费",
+      "chart.invest.welcome": "迎新红利",
+      "chart.invest.special": "特别红利",
+      "chart.invest.ownOnly": "没有红利的情形",
+
+      "chip.pct100.t": "100% 保费即投",
+      "chip.pct100.d": "保费从首日起全数投入，不让资金空转",
+      "chip.welcome.t": "迎新红利 · 最高 75%",
+      "chip.welcome.d": "前 3 个保单年度逐年加码，直接增厚本金",
+      "chip.special.t": "特别红利 · 5% 升至 8%",
+      "chip.special.d": "第 10 年起每年 5%，第 21 年起 8%",
+      "chip.cap.t": "附加费 · 11 年封顶",
+      "chip.cap.d": "缴满 11 年年度保费后不再收取附加费",
+
+      /* ---- 幕 2：增长路径 ---- */
+      "path.title": "钱怎么长起来，红利帮了多少",
+      "path.sub": "两条线之间的金色区域，就是 AIA 红利为您额外创造的价值",
+      "chart.value": "账户价值",
       "chart.principal": "累计本金",
-      "chart.gainArea": "累计收益",
-      "chart.cons": "保守 4%",
-      "chart.bal": "平衡 6%",
-      "chart.agg": "进取 8%",
-      "chart.payEnd": "缴费期满",
-      "chart.retire": "开始领取",
+      "chart.withBonus": "含三层红利",
+      "chart.withoutBonus": "仅自有资金",
       "chart.age": "年龄",
+      "path.atAge": "{age} 岁时的账户价值",
+      "delta.extra": "AIA 额外创造",
+      "delta.extraPct": "相当于本金的 {pct}",
+      "delta.totalInvested": "实际进入市场",
 
-      /* timeline */
-      "tl.title": "保单年度关键事件",
-      "tl.welcome": "迎新红利",
-      "tl.welcome.d": "前 3 个保单年度逐年投入即获额外红利",
-      "tl.special5": "特别红利 5%",
-      "tl.special5.d": "第 10 个保单年度起，每年追加投入的 5%",
-      "tl.payend": "初始投资期结束",
-      "tl.payend.d": "之后不再缴付保费，账户继续滚动增值",
-      "tl.special8": "特别红利提升至 8%",
-      "tl.special8.d": "第 21 个保单年度起提升",
-      "tl.retire": "开始领取",
-      "tl.retire.d": "可一次性提取或按年领取",
+      /* ---- 幕 3：价值换算 ---- */
+      "value.title": "这笔钱，能换到什么",
+      "value.sub": "把账户价值和您熟悉的生活开销放在同一把尺子上",
+      "value.atAge": "{age} 岁时账户价值",
+      "value.note": "换算仅为示意，帮助理解金额量级，不构成任何承诺。",
+      "value.bar.total": "账户总价值",
+      "value.bar.home": "一套房产首付",
+      "value.bar.edu": "一份大学学费",
+      "value.bar.retire": "一年退休现金流",
+      "value.mult.home": "可付 {n} 套首付",
+      "value.mult.edu": "可付 {n} 份学费",
+      "value.mult.retire": "可领 {n} 年",
 
-      /* table */
-      "table.title": "逐年利益演示表",
-      "table.year": "保单年度",
-      "table.age": "年龄",
-      "table.premium": "当年投入",
-      "table.bonus": "红利投入",
-      "table.cons": "保守 4%",
-      "table.bal": "平衡 6%",
-      "table.agg": "进取 8%",
-
-      "footnote": "注：以上为基于假定年投资回报率的示意测算，并非保证收益。投资涉及风险，实际账户价值可能高于或低于演示数值，甚至低于累计投入本金。",
-
-      /* product page */
-      "pr.eyebrow": "长期投资储蓄计划",
-      "pr.h1": "远景成长投资储蓄计划",
-      "pr.hero.p": "从第一天起，100% 保费用于投资；迎新红利加持初始资本，特别红利加速长期复利，配合专业基金组合，陪客户从容走向每一个人生目标。",
-      "pr.cta.plan": "立即为客户规划",
-      "pr.cta.detail": "了解计划亮点",
-      "pr.feat.title": "计划六大亮点",
-      "pr.feat.sub": "把整个投资旅程的潜在回报推到更高",
-      "pr.f1.t": "100% 保费即投",
-      "pr.f1.d": "保费从缴纳首日起全部用于投资，不让资金等待，尽早开始复利积累。",
-      "pr.f2.t": "迎新红利",
-      "pr.f2.d": "前 3 个保单年度按年缴保费比例发放，最高可达年缴保费的 75%，直接增厚初始资本。",
-      "pr.f3.t": "特别红利",
-      "pr.f3.d": "第 10 年起每年额外 5%、第 21 年起提升至 8%，持续为长期投资加码。",
-      "pr.f4.t": "三种投资期",
-      "pr.f4.d": "10 / 15 / 20 年初始投资期自由选择，匹配不同的人生时间表与资金安排。",
-      "pr.f5.t": "专业基金组合",
-      "pr.f5.d": "精英基金、引导性组合与零售基金可选，全球顶级投资机构管理，股债搭配覆盖不同风险偏好。",
-      "pr.f6.t": "保障可叠加",
-      "pr.f6.d": "可加购定期寿险、危疾免缴等附加契约，投资之余为家庭构筑安全网，且无需体检即可投保。",
-
-      "pr.fund.title": "三类风险组合，匹配不同目标",
-      "pr.fund.sub": "股票与固定收益策略性搭配，长期追求回报与稳定性的平衡",
-      "fund.cons": "保守型基金",
-      "fund.bal": "平衡型基金",
-      "fund.agg": "进取型基金",
+      /* ---- 幕 4：风险匹配 ---- */
+      "funds.title": "三档组合，匹配您的风险偏好",
+      "funds.sub": "点击卡片即可切换当前方案档位",
+      "fund.cons": "友邦精英保守型基金",
+      "fund.bal": "友邦精英平衡型基金",
+      "fund.agg": "友邦精英冒险型基金",
       "fund.risk.low": "低至中风险",
       "fund.risk.mid": "中至高风险",
       "fund.risk.high": "较高风险",
-      "fund.assume": "假定回报",
+      "fund.stock": "股票",
+      "funds.atAge": "{age} 岁账户价值",
+      "funds.current": "当前方案",
 
-      "pr.case.title": "客户案例：25 岁开始，65 岁退休",
-      "pr.case.p1": "年投入",
-      "pr.case.p2": "缴费期",
-      "pr.case.p3": "投资组合",
-      "pr.case.p3v": "进取型基金",
-      "pr.case.note": "按产品手册示例：8% 假定年回报率下，65 岁退保可得约 S$1,061,100；4% 假定回报率下约 S$361,400。数值为手册假设演示，非保证。",
+      /* ---- 幕 5：专属方案 ---- */
+      "summary.title": "您的专属方案",
+      "summary.sub": "三档情景一目了然，附下一步建议",
+      "sum.client": "客户",
+      "sum.advisor": "顾问",
+      "sum.age": "投保年龄",
+      "sum.term": "初始投资期",
+      "sum.premium": "年缴保费",
+      "sum.payout": "目标领取年龄",
+      "sum.selected": "所选组合",
+      "sum.principal": "累计投入本金",
+      "sum.next": "下一步",
+      "sum.next1": "确认风险偏好与投资期",
+      "sum.next2": "选择附加保障（定期险 / 危疾免缴）",
+      "sum.next3": "完成投保申请，无需体检",
+      "sum.print": "导出 / 打印方案",
+      "sum.restart": "回到封面",
 
-      "pr.guard.title": "灵活与安心，同样重要",
-      "g1.t": "保费免缴证",
-      "g1.d": "每缴满 5 年可获免缴证，最长累计 12 个月，从容安排现金流。",
-      "g2.t": "保费假期",
-      "g2.d": "遇到经济压力可申请暂停缴费，待状况恢复后继续计划。",
-      "g3.t": "灵活套现",
-      "g3.d": "投资期结束后可按需提取保单价值，不收取提取费用。",
-      "g4.t": "家产规划",
-      "g4.d": "可指定第二受保人完成保单传承，让财富跨越代际延续。",
+      /* ---- 灵活保障 chips ---- */
+      "fx.medical": "无需体检",
+      "fx.pass": "保费免缴证 36 个月",
+      "fx.holiday": "保费假期",
+      "fx.cashout": "投资期后免费提取",
+      "fx.legacy": "第二受保人传承",
 
-      "pr.disclaimer": "重要提示：本页面仅为产品概念与演示用途，不构成保险合同、投资建议或收益承诺。投资联结计划涉及投资风险，子基金表现并无保证，单位价值及收入可升可降，过往表现不代表未来收益，提前终止可能损失本金。具体保障、费用与条款以正式保单合同为准。",
-      "pr.cta2.t": "为客户生成专属规划",
-      "pr.cta2.p": "调整年龄、年投入与风险偏好，立即看到三档情景下的长期收益路径",
-      "pr.cta2.btn": "进入财富规划器"
+      /* ---- 顾问控制台 ---- */
+      "console.title": "顾问控制台",
+      "console.hint": "本面板不会出现在客户视野中，可随时隐藏。",
+      "console.client": "客户姓名",
+      "console.advisor": "顾问姓名",
+      "console.age": "投保年龄",
+      "console.retire": "目标领取年龄",
+      "console.premium": "年缴保费",
+      "console.term": "初始投资期",
+      "console.risk": "投资组合",
+      "console.payout": "领取年限",
+      "console.cases": "手册案例",
+      "console.case.zhiwen": "致文 · 25 岁 / 10 年",
+      "console.case.luna": "露娜 · 30 岁 / 20 年",
+      "console.case.custom": "自定义",
+      "console.stress": "下行压力测试",
+      "console.stress.off": "关闭",
+      "console.stress.flat": "零回报",
+      "console.stress.down": "年化 −2%",
+      "console.stressOn": "压力测试进行中",
+
+      /* ---- 事件节点 ---- */
+      "ms.welcome": "迎新红利",
+      "ms.supcap": "附加费封顶",
+      "ms.iipend": "投资期结束",
+
+      /* ---- 免责 ---- */
+      "disc.short": "演示数据 · 非保证收益 · 投资涉及风险",
+      "disc.full": "重要提示：本页面为产品概念与演示用途，不构成保险合同、投资建议或收益承诺。友邦成就一生 3.0 计划为投资联结保险计划（ILP），投资涉及风险，包括可能亏损所投入的本金。子基金表现并无保证，单位价值及所得收入可升可跌，过往表现不可作为未来表现的指标。实际保单价值取决于所投资基金的实际表现，可能低于已缴付的保费总额。4% / 6% / 8% 为假定年投资回报率，非保证。具体保障、费用与条款以正式保单合同及经审核的利益演示书为准。"
     },
 
+    /* ==========================================================
+       English
+       ========================================================== */
     en: {
-      "nav.plan": "Wealth Planner",
-      "nav.product": "The Plan",
-      "nav.sub": "Investment-Linked Savings · Client Demo",
-      "nav.demo": "Illustrative only — returns are not guaranteed",
+      "app.title": "AIA Pro Achiever 3.0 · Client Presentation",
+      "app.console": "Adviser console",
+      "app.demo": "Illustrative only — not guaranteed",
+      "app.lang": "中文",
+      "scene.hint": "Use ← → or swipe to change scenes",
 
-      "planner.title": "Client Inputs",
-      "planner.subtitle": "Drag to adjust — charts update live",
-      "ctrl.age": "Current age",
-      "ctrl.ageUnit": "yrs",
-      "ctrl.yearUnit": "yrs",
-      "unit.yr": "yr",
-      "ctrl.retire": "Payout age",
-      "ctrl.premium": "Annual investment",
-      "ctrl.payYears": "Premium term",
-      "ctrl.risk": "Portfolio (assumed return)",
-      "ctrl.withdrawYears": "Annual payout duration",
-      "risk.cons": "Cautious",
-      "risk.bal": "Balanced",
-      "risk.agg": "Adventurous",
-      "planner.reset": "Reset to sample client",
-      "planner.print": "Export / Print plan",
-      "planner.note": "Illustrative model: assumed returns are net of a 1.45% annual fund management fee. Welcome and special bonus rules are simplified from product terms; actual benefits follow the policy contract and official benefit illustration.",
+      "scene.0": "Cover",
+      "scene.1": "Outlay & bonuses",
+      "scene.2": "Growth path",
+      "scene.3": "What it means",
+      "scene.4": "Risk fit",
+      "scene.5": "Your plan",
 
-      "kpi.invested": "Total principal invested",
-      "kpi.valueAt": "Account value at payout (selected)",
-      "kpi.gain": "Cumulative gain",
-      "kpi.multiple": "Multiple of principal",
-      "kpi.annualIncome": "Estimated annual income",
-      "kpi.for": "level payout over",
-      "kpi.years": "years",
-      "kpi.scenarios": "Three scenarios · account value at payout",
+      "cover.eyebrow": "Regular Premium Investment-Linked Plan (ILP)",
+      "cover.for": "Tailored wealth plan",
+      "cover.goal": "Your goal",
+      "cover.prepared": "Prepared by",
+      "cover.start": "Start presentation",
 
-      "chart.growth": "Account value growth (three scenarios)",
-      "chart.growth.hint": "Age on x-axis, account value on y-axis",
-      "chart.stack": "Principal vs. gain",
-      "chart.alloc": "Asset allocation",
-      "chart.stock": "Equities",
-      "chart.bond": "Fixed income",
+      "unit.year": "yr",
+      "unit.age": "",
+      "unit.times": "×",
+
+      "invest.annual": "Annual premium",
+      "invest.total": "Total principal",
+      "engine.title": "You fund it early — compounding and bonuses do the rest",
+      "engine.sub": "Each bar = capital actually invested that year; the gold portion is what AIA adds on top",
+      "engine.cumulative": "AIA bonuses",
+      "engine.after": "For the next {n} years\nyou pay nothing more",
+      "engine.after.sub": "The rest is left to compounding and bonuses",
+      "chart.invest.premium": "Your premiums",
+      "chart.invest.welcome": "Welcome bonus",
+      "chart.invest.special": "Special bonus",
+      "chart.invest.ownOnly": "Without bonuses",
+
+      "chip.pct100.t": "100% invested from day one",
+      "chip.pct100.d": "Premiums go straight to work — no idle capital",
+      "chip.welcome.t": "Welcome bonus · up to 75%",
+      "chip.welcome.d": "Paid over the first three policy years",
+      "chip.special.t": "Special bonus · 5% to 8%",
+      "chip.special.d": "5% a year from year 10, 8% from year 21",
+      "chip.cap.t": "Charges capped after 11 years",
+      "chip.cap.d": "No supplementary charges once 11 premiums are paid",
+
+      "path.title": "How it grows — and what bonuses add",
+      "path.sub": "The gold band between the two lines is the extra value AIA's bonuses create",
+      "chart.value": "Account value",
       "chart.principal": "Cumulative principal",
-      "chart.gainArea": "Cumulative gain",
-      "chart.cons": "Cautious 4%",
-      "chart.bal": "Balanced 6%",
-      "chart.agg": "Adventurous 8%",
-      "chart.payEnd": "Premium term ends",
-      "chart.retire": "Payout starts",
+      "chart.withBonus": "With all bonuses",
+      "chart.withoutBonus": "Own capital only",
       "chart.age": "Age",
+      "path.atAge": "Account value at age {age}",
+      "delta.extra": "Extra from AIA",
+      "delta.extraPct": "equal to {pct} of principal",
+      "delta.totalInvested": "Capital in the market",
 
-      "tl.title": "Key policy milestones",
-      "tl.welcome": "Welcome bonus",
-      "tl.welcome.d": "Granted in the first 3 policy years upon each annual premium",
-      "tl.special5": "Special bonus 5%",
-      "tl.special5.d": "From policy year 10, an extra 5% of annual premium each year",
-      "tl.payend": "Initial investment period ends",
-      "tl.payend.d": "No further premiums; the account keeps compounding",
-      "tl.special8": "Special bonus rises to 8%",
-      "tl.special8.d": "From policy year 21 onwards",
-      "tl.retire": "Payout begins",
-      "tl.retire.d": "Lump-sum withdrawal or annual income",
+      "value.title": "What this money can do",
+      "value.sub": "Your account value measured against costs you already know",
+      "value.atAge": "Account value at {age}",
+      "value.note": "Conversions are illustrative, to help grasp the magnitude. Not a promise of any kind.",
+      "value.bar.total": "Total account value",
+      "value.bar.home": "One property down payment",
+      "value.bar.edu": "One university degree",
+      "value.bar.retire": "One year of retirement income",
+      "value.mult.home": "covers {n} down payments",
+      "value.mult.edu": "covers {n} degrees",
+      "value.mult.retire": "lasts {n} years",
 
-      "table.title": "Year-by-year illustration",
-      "table.year": "Policy yr",
-      "table.age": "Age",
-      "table.premium": "Premium",
-      "table.bonus": "Bonus",
-      "table.cons": "Cautious 4%",
-      "table.bal": "Balanced 6%",
-      "table.agg": "Adv. 8%",
-
-      "footnote": "Note: Figures are illustrative projections based on assumed rates of return and are not guaranteed. Investments carry risk — actual account values may be higher or lower than shown and may be less than total premiums paid.",
-
-      "pr.eyebrow": "Long-Term Investment-Linked Savings Plan",
-      "pr.h1": "Vista Growth Investment Plan",
-      "pr.hero.p": "From day one, 100% of premiums are invested. A welcome bonus boosts your starting capital, special bonuses accelerate long-term compounding, and professionally managed funds carry clients toward every life goal.",
-      "pr.cta.plan": "Plan for a client",
-      "pr.cta.detail": "Plan highlights",
-      "pr.feat.title": "Six plan highlights",
-      "pr.feat.sub": "Maximising the potential of the entire investment journey",
-      "pr.f1.t": "100% invested from day one",
-      "pr.f1.d": "Every premium dollar is invested immediately — no waiting, compounding starts early.",
-      "pr.f2.t": "Welcome bonus",
-      "pr.f2.d": "Paid in the first three policy years, up to 75% of annual premium — instantly enlarging starting capital.",
-      "pr.f3.t": "Special bonus",
-      "pr.f3.d": "An extra 5% every year from policy year 10, rising to 8% from year 21.",
-      "pr.f4.t": "Three premium terms",
-      "pr.f4.d": "Choose a 10-, 15- or 20-year initial investment period to match each life timeline.",
-      "pr.f5.t": "Professional fund line-up",
-      "pr.f5.d": "Elite funds, guided portfolios and retail funds managed by world-class institutions, across risk profiles.",
-      "pr.f6.t": "Optional protection",
-      "pr.f6.d": "Add term life and premium waiver riders — a family safety net alongside investment, with no medical underwriting.",
-
-      "pr.fund.title": "Three risk portfolios for every goal",
-      "pr.fund.sub": "Strategic equity / fixed-income blends balancing long-term return and stability",
-      "fund.cons": "Cautious Fund",
-      "fund.bal": "Balanced Fund",
-      "fund.agg": "Adventurous Fund",
+      "funds.title": "Three portfolios, three risk appetites",
+      "funds.sub": "Tap a card to switch the plan's portfolio",
+      "fund.cons": "AIA Elite Cautious Fund",
+      "fund.bal": "AIA Elite Balanced Fund",
+      "fund.agg": "AIA Elite Adventurous Fund",
       "fund.risk.low": "Low–medium risk",
       "fund.risk.mid": "Medium–high risk",
       "fund.risk.high": "Higher risk",
-      "fund.assume": "Assumed return",
+      "fund.stock": "Equities",
+      "funds.atAge": "Value at {age}",
+      "funds.current": "Current plan",
 
-      "pr.case.title": "Client story: starting at 25, retiring at 65",
-      "pr.case.p1": "Annual premium",
-      "pr.case.p2": "Premium term",
-      "pr.case.p3": "Portfolio",
-      "pr.case.p3v": "Adventurous Fund",
-      "pr.case.note": "Per the product brochure: at an assumed 8% return, surrender value at age 65 is about S$1,061,100; at 4%, about S$361,400. Assumed illustration only — not guaranteed.",
+      "summary.title": "Your tailored plan",
+      "summary.sub": "Three scenarios at a glance, with next steps",
+      "sum.client": "Client",
+      "sum.advisor": "Adviser",
+      "sum.age": "Entry age",
+      "sum.term": "Initial investment period",
+      "sum.premium": "Annual premium",
+      "sum.payout": "Target payout age",
+      "sum.selected": "Selected portfolio",
+      "sum.principal": "Total principal",
+      "sum.next": "Next steps",
+      "sum.next1": "Confirm risk appetite and horizon",
+      "sum.next2": "Choose riders (term / CI waiver)",
+      "sum.next3": "Complete the application — no check-up",
+      "sum.print": "Export / print plan",
+      "sum.restart": "Back to cover",
 
-      "pr.guard.title": "Flexibility and peace of mind",
-      "g1.t": "Premium waiver vouchers",
-      "g1.d": "Earned every 5 paid years, usable for up to 12 cumulative months.",
-      "g2.t": "Premium holiday",
-      "g2.d": "Pause premiums during financial strain and resume when ready.",
-      "g3.t": "Flexible withdrawal",
-      "g3.d": "After the investment period, withdraw account value with no withdrawal charge.",
-      "g4.t": "Legacy planning",
-      "g4.d": "Name a second life insured to transfer the policy across generations.",
+      "fx.medical": "No medical check-up",
+      "fx.pass": "36 months premium passes",
+      "fx.holiday": "Premium holiday",
+      "fx.cashout": "Fee-free withdrawals after IIP",
+      "fx.legacy": "Second insured legacy",
 
-      "pr.disclaimer": "Important: this page is a conceptual product illustration only. It is not an insurance contract, investment advice or a return promise. Investment-linked plans carry investment risk; sub-fund performance is not guaranteed, unit values and income may fall or rise, past performance does not indicate future results, and early termination may result in principal loss. Exact coverage, charges and terms follow the formal policy contract.",
-      "pr.cta2.t": "Build a tailored client plan",
-      "pr.cta2.p": "Adjust age, annual investment and risk profile to see long-term paths under all three scenarios instantly",
-      "pr.cta2.btn": "Open the Wealth Planner"
+      "console.title": "Adviser console",
+      "console.hint": "This panel never appears in the client's view.",
+      "console.client": "Client name",
+      "console.advisor": "Adviser name",
+      "console.age": "Entry age",
+      "console.retire": "Target payout age",
+      "console.premium": "Annual premium",
+      "console.term": "Initial investment period",
+      "console.risk": "Portfolio",
+      "console.payout": "Payout years",
+      "console.cases": "Brochure cases",
+      "console.case.zhiwen": "Zhiwen · 25 / 10 yrs",
+      "console.case.luna": "Luna · 30 / 20 yrs",
+      "console.case.custom": "Custom",
+      "console.stress": "Downside stress test",
+      "console.stress.off": "Off",
+      "console.stress.flat": "Zero return",
+      "console.stress.down": "−2% p.a.",
+      "console.stressOn": "Stress test active",
+
+      "ms.welcome": "Welcome bonus",
+      "ms.supcap": "Charges capped",
+      "ms.iipend": "IIP ends",
+
+      "disc.short": "Illustrative · not guaranteed · involves risk",
+      "disc.full": "Important: this page is a conceptual illustration only. It is not an insurance contract, investment advice or a promise of returns. AIA Pro Achiever 3.0 is an investment-linked plan (ILP); investing involves risk, including possible loss of principal. Sub-fund performance is not guaranteed, unit values may fall as well as rise, and past performance is not indicative of future results. The 4% / 6% / 8% figures are assumed annual returns and are not guaranteed. Exact terms follow the formal policy contract and the approved benefit illustration."
     }
   };
 
-  let lang = localStorage.getItem("vista-lang") || "zh";
+  /* ================= 运行时 ================= */
+  let lang = "zh";
+  try { lang = localStorage.getItem("vista-lang") || "zh"; } catch (e) { /* file:// 下忽略 */ }
+  if (!DICT[lang]) lang = "zh";
+
   const listeners = [];
 
-  function t(key) {
-    return (DICT[lang] && DICT[lang][key]) || (DICT.zh[key]) || key;
+  function t(key, vars) {
+    let s = (DICT[lang] && DICT[lang][key]) || (DICT.zh[key]) || key;
+    if (vars) {
+      Object.keys(vars).forEach(function (k) {
+        s = s.replace(new RegExp("\\{" + k + "\\}", "g"), vars[k]);
+      });
+    }
+    return s;
   }
   function getLang() { return lang; }
   function setLang(next) {
-    if (!DICT[next]) return;
+    if (!DICT[next] || next === lang) return;
     lang = next;
-    localStorage.setItem("vista-lang", lang);
+    try { localStorage.setItem("vista-lang", lang); } catch (e) { /* noop */ }
     document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
     applyI18n();
-    listeners.forEach(fn => fn(lang));
+    listeners.forEach(function (fn) { fn(lang); });
   }
   function onChange(fn) { listeners.push(fn); }
 
+  /* ---------- 数字格式 ---------- */
+  function fmtMoney(v) {
+    return Math.round(Number(v) || 0).toLocaleString("en-US");
+  }
+  function fmtPct(v, digits) {
+    return ((v || 0) * 100).toFixed(digits === undefined ? 0 : digits) + "%";
+  }
+  function fmtNum(v, digits) {
+    return (Number(v) || 0).toFixed(digits === undefined ? 1 : digits);
+  }
+  function compact(v) {
+    const n = Math.round(Number(v) || 0);
+    const a = Math.abs(n);
+    if (lang === "zh") {
+      if (a >= 1e8) return (n / 1e8).toFixed(2) + "亿";
+      if (a >= 1e4) return (n / 1e4).toFixed(a >= 1e6 ? 0 : 1) + "万";
+      return String(n);
+    }
+    if (a >= 1e6) return (n / 1e6).toFixed(2) + "M";
+    if (a >= 1e3) return (n / 1e3).toFixed(a >= 1e5 ? 0 : 1) + "K";
+    return String(n);
+  }
+  function currency() { return window.PRODUCT.currency.symbol; }
+  function money(v) { return currency() + " " + fmtMoney(v); }
+
   function applyI18n(root) {
-    (root || document).querySelectorAll("[data-i18n]").forEach(el => {
+    (root || document).querySelectorAll("[data-i18n]").forEach(function (el) {
       el.textContent = t(el.getAttribute("data-i18n"));
     });
-    (root || document).querySelectorAll("[data-i18n-html]").forEach(el => {
-      el.innerHTML = t(el.getAttribute("data-i18n-html"));
-    });
   }
 
-  function fmtMoney(v, opts) {
-    opts = opts || {};
-    const locale = lang === "zh" ? "zh-CN" : "en-SG";
-    const currency = opts.currency || "CNY";
-    if (opts.compact) {
-      return new Intl.NumberFormat(locale, {
-        notation: "compact", maximumFractionDigits: 1
-      }).format(Math.round(v));
-    }
-    return new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(Math.round(v));
-  }
-  function currencySymbol() { return lang === "zh" ? "¥" : "S$"; }
+  window.I18N = {
+    t: t, getLang: getLang, setLang: setLang, onChange: onChange,
+    applyI18n: applyI18n, fmtMoney: fmtMoney, fmtPct: fmtPct, fmtNum: fmtNum,
+    compact: compact, currency: currency, money: money
+  };
 
-  window.I18N = { t, getLang, setLang, onChange, applyI18n, fmtMoney, currencySymbol };
-
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
     document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
     applyI18n();
-    document.querySelectorAll("[data-lang-btn]").forEach(btn => {
-      btn.addEventListener("click", () => setLang(btn.getAttribute("data-lang-btn")));
+    document.querySelectorAll("[data-lang-btn]").forEach(function (btn) {
+      btn.addEventListener("click", function () { setLang(btn.getAttribute("data-lang-btn")); });
     });
     syncLangButtons();
     onChange(syncLangButtons);
   });
+
   function syncLangButtons() {
-    document.querySelectorAll("[data-lang-btn]").forEach(b => {
+    document.querySelectorAll("[data-lang-btn]").forEach(function (b) {
       b.classList.toggle("active", b.getAttribute("data-lang-btn") === lang);
     });
   }
