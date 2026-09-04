@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-cream font-sans text-ink antialiased;
+    overscroll-behavior: none;
+  }
+  ::selection {
+    @apply bg-gold/25;
+  }
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(
+      to right,
+      #b08d57 var(--fill, 50%),
+      rgba(255, 255, 255, 0.14) var(--fill, 50%)
+    );
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    background: #fff;
+    border: 3px solid #b08d57;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ---- 打印：只出专属方案幕 ---- */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #scene-print,
+  #scene-print * {
+    visibility: visible;
+  }
+  #scene-print {
+    position: fixed !important;
+    inset: 0 !important;
+    background: #fff !important;
+  }
+}
